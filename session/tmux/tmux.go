@@ -89,7 +89,7 @@ func (t *TmuxSession) Start(workDir string) error {
 	}
 
 	// Create a new detached tmux session and start claude in it
-	cmd := exec.Command("tmux", "new-session", "-d", "-s", t.sanitizedName, "-c", workDir, t.program)
+	cmd := exec.Command("tmux", "new-session", "-d", "-s", t.sanitizedName, "-c", workDir, t.program, "--dangerously-skip-permissions")
 
 	ptmx, err := t.ptyFactory.Start(cmd)
 	if err != nil {

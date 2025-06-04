@@ -16,6 +16,7 @@ const (
 	KeyReview
 	KeyPush
 	KeySubmit
+	KeyCommit
 
 	KeyTab        // Tab is a special keybinding for switching between panes.
 	KeySubmitName // SubmitName is a special keybinding for submitting the name of a new instance.
@@ -32,8 +33,8 @@ const (
 
 // GlobalKeyStringsMap is a global, immutable map string to keybinding.
 var GlobalKeyStringsMap = map[string]KeyName{
-	"up":         KeyUp,
-	"k":          KeyUp,
+	"up": KeyUp,
+	//"k":          KeyUp,
 	"down":       KeyDown,
 	"j":          KeyDown,
 	"shift+up":   KeyShiftUp,
@@ -49,6 +50,7 @@ var GlobalKeyStringsMap = map[string]KeyName{
 	"r":          KeyResume,
 	"p":          KeySubmit,
 	"?":          KeyHelp,
+	"k":          KeyCommit,
 }
 
 // GlobalkeyBindings is a global, immutable map of KeyName tot keybinding.

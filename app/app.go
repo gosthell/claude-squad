@@ -566,6 +566,23 @@ func (m *home) handleKeyPress(msg tea.KeyMsg) (mod tea.Model, cmd tea.Cmd) {
 		// Show confirmation modal
 		message := fmt.Sprintf("[!] Push changes from session '%s'?", selected.Title)
 		return m, m.confirmAction(message, pushAction)
+	case keys.KeyCommit:
+		selected := m.list.GetSelectedInstance()
+		if selected == nil {
+			return m, nil
+		}
+
+		// Default commit message with timestamp
+		commitMsg := fmt.Sprintf("[claudesquad] update from '%s' on %s", selected.Title, time.Now().Format(time.RFC822))
+		worktree, err := selected.GetGitWorktree()
+		if err != nil {
+			return m, m.handleError(err)
+		}
+		if err = worktree.CommitChanges(commitMsg); err != nil {
+			return m, m.handleError(err)
+		}
+
+		return m, nil
 	case keys.KeyCheckout:
 		selected := m.list.GetSelectedInstance()
 		if selected == nil {
